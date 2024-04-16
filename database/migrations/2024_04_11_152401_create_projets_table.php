@@ -12,7 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('projets', function (Blueprint $table) {
-            $table->id();
+            $table->id('codeProjet');
+            $table->string('nomProjet');
+            $table->date('dateLancement');
+            $table->integer('duree');
+            $table->unsignedBigInteger('codLocalite');
+            $table->foreign('codLocalite')->references('codLocalite')->on('localites');
             $table->timestamps();
         });
     }

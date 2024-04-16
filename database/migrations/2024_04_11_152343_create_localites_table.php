@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('localites', function (Blueprint $table) {
-            $table->id();
+            $table->id('codLocalite');
+            $table->string('nomLocalite');
             $table->timestamps();
         });
     }

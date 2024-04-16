@@ -12,7 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('suivis', function (Blueprint $table) {
-            $table->id();
+            $table->id('numSuivi');
+            $table->date('dateSuivi');
+            $table->integer('pourcentage');
+            $table->unsignedBigInteger('codeProjet');
+            $table->foreign('codeProjet')->references('codeProjet')->on('projets');
             $table->timestamps();
         });
     }

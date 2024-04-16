@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Localite;
 use App\Models\Projet;
 use Illuminate\Http\Request;
+
+use function Ramsey\Uuid\v1;
 
 class ProjetController extends Controller
 {
@@ -12,7 +15,9 @@ class ProjetController extends Controller
      */
     public function index()
     {
-        //
+        $projets = Projet::all();
+
+        return view('projets.index', compact('projets'));
     }
 
     /**
@@ -20,7 +25,8 @@ class ProjetController extends Controller
      */
     public function create()
     {
-        //
+        $localites = Localite::all();
+        return view('projets.create', compact('localites'));
     }
 
     /**
@@ -28,7 +34,16 @@ class ProjetController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validate = $request->validate([
+            'codeProjet' => 'required|string|unique:projets,codeProjet',
+            'nomProjet' => 'string',
+            'dateLancement' => 'date',
+            'duree' => 'integer',
+            'codLocalite' => 'integer'
+        ]);
+
+        Projet::create($validate);
+        return redirect()->route('projets.index')->with('success', 'Projet crée avec succes');
     }
 
     /**
@@ -42,17 +57,31 @@ class ProjetController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Projet $projet)
+    public function edit(int $codeProjet)
     {
-        //
+        $projet = Projet::find($codeProjet);
+        $localites = Localite::all();
+        return view('projets.edit', compact('projet', 'localites'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Projet $projet)
+    public function update(Request $request, int $codeProjet)
     {
-        //
+        $projet = Projet::find($codeProjet);
+
+        $validate = $request->validate([
+            'codeProjet' => 'required|string|unique:projets,codeProjet',
+            'nomProjet' => 'string',
+            'dateLancement' => 'date',
+            'duree' => 'integer',
+            'localite' => 'integer'
+        ]);
+
+        $projet->update($validate);
+
+        return redirect()->route('projets.index')->with('success', 'Projet updated successfully');
     }
 
     /**
@@ -60,6 +89,9 @@ class ProjetController extends Controller
      */
     public function destroy(Projet $projet)
     {
-        //
+
+        $projet->delete();
+
+        return redirect()->route('projets.index')->with('success', 'Projet deleted successfully');
     }
 }
