@@ -32,8 +32,7 @@
         </ul>
     </div>
     @endif
-
-    <table class="table mt-">
+  <table class="table mt-2">
         <thead>
             <tr>
                 <th>Nom du Projet</th>

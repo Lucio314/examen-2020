@@ -9,6 +9,7 @@ class Projet extends Model
 {
     use HasFactory;
     protected $primaryKey = 'codeProjet';
+    public $incrementing = false;
     protected $guarded = [];
     public function localite()
     {

@@ -46,7 +46,7 @@
                     @endforeach
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary">Soumettre</button>
+            <input type="submit" class="btn btn-primary" value="Soumettre" />
             <button type="reset" class="btn btn-secondary">Annuler</button>
         </form>
     </div>

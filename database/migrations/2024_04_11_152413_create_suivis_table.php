@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id('numSuivi');
             $table->date('dateSuivi');
             $table->integer('pourcentage');
-            $table->unsignedBigInteger('codeProjet');
+            $table->string('codeProjet');
             $table->foreign('codeProjet')->references('codeProjet')->on('projets');
             $table->timestamps();
         });

@@ -34,6 +34,7 @@ class ProjetController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request);
         $validate = $request->validate([
             'codeProjet' => 'required|string|unique:projets,codeProjet',
             'nomProjet' => 'string',
@@ -57,9 +58,9 @@ class ProjetController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(int $codeProjet)
+    public function edit(Projet $projet)
     {
-        $projet = Projet::find($codeProjet);
+        //$projet = Projet::find($codeProjet);
         $localites = Localite::all();
         return view('projets.edit', compact('projet', 'localites'));
     }
@@ -67,9 +68,9 @@ class ProjetController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, int $codeProjet)
+    public function update(Request $request, Projet $projet)
     {
-        $projet = Projet::find($codeProjet);
+       // $projet = Projet::find($codeProjet);
 
         $validate = $request->validate([
             'codeProjet' => 'required|string|unique:projets,codeProjet',
